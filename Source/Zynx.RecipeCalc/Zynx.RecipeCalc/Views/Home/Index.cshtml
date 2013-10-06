@@ -9,7 +9,8 @@
 </p>
 
 <div ng-app="recipeCalcApp">
-	<ul>
+	<ul ng-controller="RecipeListCtrl">
+
 		<li ng-repeat="recipe in recipies">
 			<span class="recipe-name">{{ recipe.Name }}</span>
 			
