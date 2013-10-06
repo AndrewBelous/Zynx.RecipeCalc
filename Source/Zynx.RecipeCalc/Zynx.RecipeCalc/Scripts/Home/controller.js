@@ -3,22 +3,12 @@
 //	console.log("Controller loaded");
 //});
 
-function RecipeListCtrl($scope)
+function RecipeListCtrl($scope, $http)
 {
-	$scope.recipies = [
-	  {
-	  	"Name": "Recipe 1",
-	  	
-	  },
-	  {
-	  	"Name": "Recipe 2",
-	  	
-	  },
-	  {
-	  	"Name": "Recipe 3",
-	  	
-	  }
-	];
+	$http.get('api/recipes').success(function (data)
+	{
+		$scope.recipes = data;
+	});
 }
 
 // angular bindings for app and controllers
