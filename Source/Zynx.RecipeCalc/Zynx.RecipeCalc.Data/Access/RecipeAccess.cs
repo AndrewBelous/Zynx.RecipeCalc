@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zynx.RecipeCalc.Data
+namespace Zynx.RecipeCalc.Data.Access
 {
-	public class RavenProto
+	class RecipeAccess
 	{
-		
 	}
-}	
+}
