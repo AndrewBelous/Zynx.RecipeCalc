@@ -1,0 +1,27 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Recipe Calculator</h2>
+<p>Provides cost of recipies after calculating and taking into account tax and discounts. 
+	Current strategy uses a tax of 8.6% and a discount of 5%. Discount only applies to organic 
+	ingredients.
+</p>
+
+<div ng-app="recipeCalcApp">
+	<ul>
+		<li ng-repeat="recipe in recipies">
+			<span class="recipe-name">{{ recipe.Name }}</span>
+			
+			<!-- TODO: ingredients list on ask -->
+			<!-- TODO: price breakdown on ask -->
+		</li>
+
+	</ul>
+</div>
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/angularjs")
+	@Scripts.Render("~/scripts/home/controller.js")
+}

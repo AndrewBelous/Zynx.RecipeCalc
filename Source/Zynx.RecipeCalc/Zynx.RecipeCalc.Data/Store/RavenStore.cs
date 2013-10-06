@@ -10,7 +10,7 @@ using Raven.Database.Server;
 
 namespace Zynx.RecipeCalc.Data.Store
 {
-	public class RavenStore : IStore
+	public sealed class RavenStore : IStore
 	{
 		private static RavenStoreImp _store = new RavenStoreImp();
 
@@ -47,6 +47,28 @@ namespace Zynx.RecipeCalc.Data.Store
 			_documentStore = new EmbeddableDocumentStore 
 				{ DataDirectory = "App_Data", UseEmbeddedHttpServer = true, };
 			_documentStore.Initialize();
+		}
+
+		public List<T> List<T>()
+		{
+			//	Since we know the number of 
+			//		items being worked with is under 100, this is a safe assumption
+			return List<T>(100);
+		}
+
+		public List<T> List<T>(int limit)
+		{
+			var res = new List<T>();
+
+			//get session
+			var sess = _documentStore.OpenSession();
+			//TODO: paging :)
+			//TODO: order by
+			res = sess.Query<T>()
+                .Customize(x=>x.WaitForNonStaleResults())
+                .Take(limit).ToList(); 
+
+			return res;
 		}
 
 		public T Load<T>(int id)
