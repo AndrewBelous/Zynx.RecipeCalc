@@ -2,6 +2,16 @@
 	ViewBag.Title = "Index";
 }
 
+@section EndOfhead
+{
+	<style type="text/css">
+		/*.ing-list, .recipe-cost
+		{
+			display: none;
+		}*/
+	</style>
+}
+
 <h2>Recipe Calculator</h2>
 <p>Provides cost of recipies after calculating and taking into account tax and discounts. 
 	Current strategy uses a tax of 8.6% and a discount of 5%. Discount only applies to organic 
@@ -13,9 +23,21 @@
 
 		<li ng-repeat="recipe in recipes">
 			<span class="recipe-name">{{ recipe.Name }}</span>
+			<a href="#" ng-click="viewDetails(recipe.Id)">Load Details</a>
 			
-			<!-- TODO: ingredients list on ask -->
-			<!-- TODO: price breakdown on ask -->
+			<!-- ingredients list on ask -->
+			<ul id="ing-list-{{recipe.Id}}" class="ing-list">
+				<li ng-repeat="ing in recipe.Ingredients">
+					<span class="ingredient-prop">{{ing.DisplayName }}</span>
+				</li>
+			</ul>
+
+			<!-- price breakdown on ask -->
+			<div id="recipe-cost-{{recipe.Id}}" class="recipe-cost">
+				<span class="cost-prop">Tax: {{ recipe.Cost.TaxDisp }}</span>
+				<span class="cost-prop">Discount: {{ recipe.Cost.DiscountDisp }}</span>
+				<span class="cost-prop">Total: {{ recipe.Cost.TotalDisp }}</span>
+			</div>
 		</li>
 
 	</ul>

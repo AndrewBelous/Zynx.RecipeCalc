@@ -10,6 +10,12 @@ namespace Zynx.RecipeCalc.Shared
 	{
 		int Id { get; set; }
 		string Name { get; set; }
-		List<int> Ingredients { get; set; }
+		IEnumerable<IngListItemDao> Ingredients { get; set; }
 	}	//i
+
+	public class IngListItemDao
+	{
+		public int Id { get; set; }
+		public double Amount { get; set; }
+	}
 }

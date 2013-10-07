@@ -10,6 +10,6 @@ namespace Zynx.RecipeCalc.Shared
 	{
 		T Get(int id);
 		void Set(T item);
-		IList<T> List();
+		IEnumerable<T> List();
 	}	//i
 }

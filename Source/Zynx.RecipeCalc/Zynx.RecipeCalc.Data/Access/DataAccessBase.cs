@@ -26,7 +26,7 @@ namespace Zynx.RecipeCalc.Data.Access
 		#region IDataAccess<T> Members
 		public abstract T Get(int id);
 		public abstract void Set(T item);
-		public abstract IList<T> List();
+		public abstract IEnumerable<T> List();
 		#endregion
 	}	//c
 }

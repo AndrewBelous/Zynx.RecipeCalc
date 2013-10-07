@@ -5,20 +5,38 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Zynx.RecipeCalc.Data.Access;
+using Zynx.RecipeCalc.Data.Objects;
+using Zynx.RecipeCalc.Domain.Logic;
+using Zynx.RecipeCalc.Domain.Models;
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Api.Controllers
 {
 	public class RecipesController : ApiController
 	{
-		// GET api/recipe
-		public IEnumerable<string> Get()
+		IRecipeLogic _logic;
+
+		public RecipesController() 
+				: this(new RecipeLogic(new RecipeAccess(), new IngredientAccess()))
 		{
-			return new string[] { "value1", "value2" };
+		}
+
+		public RecipesController(IRecipeLogic logic)
+		{
+			_logic = logic;
+		}
+
+		// GET api/recipe
+		public IEnumerable<RecipeListItem> Get()
+		{
+			return _logic.List();
 		}
 
 		// GET api/recipe/5
-		public string Get(int id)
+		public Recipe Get(int id)
 		{
-			return "value";
+			return _logic.Get(id);
 		}
 	}
 }

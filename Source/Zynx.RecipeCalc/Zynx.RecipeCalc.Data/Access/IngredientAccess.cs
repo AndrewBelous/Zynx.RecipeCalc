@@ -21,9 +21,9 @@ namespace Zynx.RecipeCalc.Data.Access
 			Store.Store((Objects.IngredientDao)item);
 		}
 
-		public override IList<IIngredientDao> List()
+		public override IEnumerable<IIngredientDao> List()
 		{
-			return (IList<IIngredientDao>)Store.List<Objects.IngredientDao>();
+			return Store.List<Objects.IngredientDao>();
 		}
 	}	//c
 }

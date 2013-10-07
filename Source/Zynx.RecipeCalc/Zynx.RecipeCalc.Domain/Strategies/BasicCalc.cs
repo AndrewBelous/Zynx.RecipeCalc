@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Domain.Strategies
 {
 	public class BasicCalc : ICalc
@@ -25,12 +27,17 @@ namespace Zynx.RecipeCalc.Domain.Strategies
 
 			//get rawtotal
 			decimal rawTotal = recipe.Ingredients.Sum(t => (t.Price * (decimal)t.IngredientAmount));
+			rawTotal = Math.Round(rawTotal, 2, MidpointRounding.AwayFromZero);
+
 			//get discount
 			result.Discount = recipe.Ingredients.Where(t => t.IsOrganic)
 					.Sum(r => ((r.Price * (decimal)r.IngredientAmount) * DISCOUNT_PERCENT));
-			//get sales tax
-			result.Tax = recipe.Ingredients.Where(t => t.MyType != Models.IngredientType.Produce)
+			
+			decimal tax = recipe.Ingredients.Where(t => t.MyType != IngredientType.Produce)
 					.Sum(r => ((r.Price * (decimal)r.IngredientAmount) * TAX_RATE));
+			//get sales tax
+			result.Tax = RoundTaxToSeven(tax);
+			
 			//set total
 			result.Total = rawTotal - result.Discount + result.Tax;
 
@@ -38,5 +45,23 @@ namespace Zynx.RecipeCalc.Domain.Strategies
 		}
 
 		#endregion
+
+		private decimal RoundTaxToSeven(decimal tax)
+		{
+			//round to 2 decimals to start
+			tax = Math.Round(tax, 2);
+			int large = (int)(tax * 100);
+
+			//check if divisible by 7
+			while (large % 7 != 0)
+			{
+				//increment by 1
+				large++;
+			} 
+
+			decimal res = (decimal)large / 100;
+
+			return res;
+		}
 	}	//c
 }	//n

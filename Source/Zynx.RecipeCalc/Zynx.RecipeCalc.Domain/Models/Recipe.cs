@@ -6,14 +6,32 @@ using System.Threading.Tasks;
 
 namespace Zynx.RecipeCalc.Domain.Models
 {
-	public class Recipe
+	public class Recipe : RecipeListItem
 	{
-		public string Name { get; set; }
-		public List<RecipeItem> Ingredients { get; set; }
+		public List<RecipeIngredient> Ingredients { get; set; }
+		public CalcResult Cost { get; set; }
 	}
 
-	public class RecipeItem : Ingredient
+	public class RecipeListItem
 	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class RecipeIngredient : Ingredient
+	{
+		public string DisplayName 
+		{
+			get 
+			{
+				string name = IngredientAmount.ToString("0.##") + " " + 
+					(!string.IsNullOrWhiteSpace(Unit) ? Unit + " of " : string.Empty) +
+					(IsOrganic ? " Organic " : string.Empty) +
+					Name;
+
+				return name;
+			}
+		}
 		public double IngredientAmount { get; set; }
 	}
 }	//n

@@ -62,7 +62,7 @@ namespace Zynx.RecipeCalc.Data.Store
 		public RavenStoreImp()
 		{
 			_documentStore = new EmbeddableDocumentStore 
-				{ DataDirectory = "App_Data", UseEmbeddedHttpServer = true, };
+				{ DataDirectory = "App_Data", };
 			_documentStore.Initialize();
 		}
 
@@ -97,6 +97,7 @@ namespace Zynx.RecipeCalc.Data.Store
 			//get session
 			var sess = _documentStore.OpenSession();
 			sess.Store(item);
+			sess.SaveChanges();
 		}
 
 		public void Delete<T>(T item)
@@ -104,6 +105,7 @@ namespace Zynx.RecipeCalc.Data.Store
 			//get session
 			var sess = _documentStore.OpenSession();
 			sess.Delete(item);
+			sess.SaveChanges();
 		}
 	}
 }	//n

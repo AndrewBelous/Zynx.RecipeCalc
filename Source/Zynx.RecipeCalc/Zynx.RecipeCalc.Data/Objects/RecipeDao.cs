@@ -12,6 +12,8 @@ namespace Zynx.RecipeCalc.Data.Objects
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public List<int> Ingredients { get; set; }
+		public IEnumerable<IngListItemDao> Ingredients { get; set; }
 	}	//c
+
+	
 }	//n

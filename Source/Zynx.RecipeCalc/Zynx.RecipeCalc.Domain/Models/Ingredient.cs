@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Domain.Models
 {
-	public enum IngredientType
-	{
-		Produce,
-		Meat,
-		Pantry
-	}
-
 	public class Ingredient
 	{
+		public int Id { get; set; }
 		public IngredientType MyType { get; set; }
 		public string Name { get; set; }
 		public decimal Price { get; set; }

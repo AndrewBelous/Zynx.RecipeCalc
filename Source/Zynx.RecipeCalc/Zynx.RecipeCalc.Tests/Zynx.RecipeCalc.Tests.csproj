@@ -99,6 +99,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerTests\RecipesControllerTest.cs" />
+    <Compile Include="Mocks\RecipeLogicMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +110,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zynx.RecipeCalc.Data\Zynx.RecipeCalc.Data.csproj">
+      <Project>{bb891e8b-4e3b-4f0f-be95-91ec436fa2ac}</Project>
+      <Name>Zynx.RecipeCalc.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zynx.RecipeCalc.Domain\Zynx.RecipeCalc.Domain.csproj">
+      <Project>{9acf4428-524f-4705-8d5a-b1d6ed9064b9}</Project>
+      <Name>Zynx.RecipeCalc.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zynx.RecipeCalc.Shared\Zynx.RecipeCalc.Shared.csproj">
+      <Project>{6cd4599e-b4bb-4ec0-9746-c56f249c04b8}</Project>
+      <Name>Zynx.RecipeCalc.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zynx.RecipeCalc\Zynx.RecipeCalc.csproj">
       <Project>{B695CEA7-2FAC-4529-BA49-A647F7FB8BBE}</Project>
       <Name>Zynx.RecipeCalc</Name>
