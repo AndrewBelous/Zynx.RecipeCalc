@@ -4,9 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zynx.RecipeCalc.Data.Store;
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Data.Access
 {
-	class RecipeAccess
+	public class RecipeAccess : DataAccessBase<IRecipeDao>
 	{
-	}
-}
+		public override IRecipeDao Get(int id)
+		{
+			return Store.Load<Objects.RecipeDao>(id);
+		}
+
+		public override void Set(IRecipeDao item)
+		{
+			Store.Store((Objects.RecipeDao)item);
+		}
+
+		public override IList<IRecipeDao> List()
+		{
+			return (IList<IRecipeDao>)Store.List<Objects.RecipeDao>();
+		}
+	}	//c
+}	

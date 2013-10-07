@@ -10,8 +10,13 @@ using Raven.Database.Server;
 
 namespace Zynx.RecipeCalc.Data.Store
 {
+	/// <summary>
+	/// Class is sealed in order to prevent subclassing in order to maintain only
+	/// one instance of <see cref="RavenStoreImp">RavenStoreImp</see>
+	/// </summary>
 	public sealed class RavenStore : IStore
 	{
+		//the store is declared static so that there is only one per application domain.
 		private static RavenStoreImp _store = new RavenStoreImp();
 
 		#region IStore Members
@@ -30,6 +35,18 @@ namespace Zynx.RecipeCalc.Data.Store
 		{
 			_store.Delete(item);
 		}
+
+		public List<T> List<T>()
+		{
+			//	Since we know the number of 
+			//		items being worked with is under 100, this is a safe assumption
+			return _store.List<T>(100);
+		}
+
+		public List<T> List<T>(int limit)
+		{
+			return _store.List<T>(limit);
+		}
 		#endregion
 	}	//c
 
@@ -47,13 +64,6 @@ namespace Zynx.RecipeCalc.Data.Store
 			_documentStore = new EmbeddableDocumentStore 
 				{ DataDirectory = "App_Data", UseEmbeddedHttpServer = true, };
 			_documentStore.Initialize();
-		}
-
-		public List<T> List<T>()
-		{
-			//	Since we know the number of 
-			//		items being worked with is under 100, this is a safe assumption
-			return List<T>(100);
 		}
 
 		public List<T> List<T>(int limit)

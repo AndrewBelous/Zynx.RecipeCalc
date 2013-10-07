@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Data.Objects
 {
-	public class RecipeDao
+	public class RecipeDao : IRecipeDao
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

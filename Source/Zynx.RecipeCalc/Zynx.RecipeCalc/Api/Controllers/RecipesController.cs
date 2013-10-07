@@ -20,20 +20,5 @@ namespace Zynx.RecipeCalc.Api.Controllers
 		{
 			return "value";
 		}
-
-		// POST api/recipe
-		public void Post([FromBody]string value)
-		{
-		}
-
-		// PUT api/recipe/5
-		public void Put(int id, [FromBody]string value)
-		{
-		}
-
-		// DELETE api/recipe/5
-		public void Delete(int id)
-		{
-		}
 	}
 }

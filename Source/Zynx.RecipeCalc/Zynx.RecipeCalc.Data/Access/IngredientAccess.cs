@@ -5,34 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Zynx.RecipeCalc.Data.Store;
+using Zynx.RecipeCalc.Shared;
 
 namespace Zynx.RecipeCalc.Data.Access
 {
-	public class IngredientAccess
+	public class IngredientAccess : DataAccessBase<IIngredientDao>
 	{
-		private IStore _store;
-
-		/// <summary>
-		/// Write-only property that must be initialized in order for this class to work
-		/// </summary>
-		public IStore Store
+		public override IIngredientDao Get(int id)
 		{
-			set { _store = value; }
+			return Store.Load<Objects.IngredientDao>(id);
 		}
 
-		public Objects.IngredientDao Get(int id)
+		public override void Set(IIngredientDao item)
 		{
-			return _store.Load<Objects.IngredientDao>(id);
+			Store.Store((Objects.IngredientDao)item);
 		}
 
-		public void Set(Objects.IngredientDao item)
+		public override IList<IIngredientDao> List()
 		{
-			_store.Store(item);
-		}
-
-		public void List()
-		{
-			
+			return (IList<IIngredientDao>)Store.List<Objects.IngredientDao>();
 		}
 	}	//c
 }

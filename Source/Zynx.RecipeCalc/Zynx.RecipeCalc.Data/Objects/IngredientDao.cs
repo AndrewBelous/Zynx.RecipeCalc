@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zynx.RecipeCalc.Shared;
+
 namespace Zynx.RecipeCalc.Data.Objects
 {
-	public enum IngredientType
-	{
-		Produce,
-		Meat,
-		Pantry
-	}
-
-	public class IngredientDao
+	public class IngredientDao : IIngredientDao
 	{
 		public int Id { get; set; }
 		public IngredientType MyType { get; set; }

@@ -11,5 +11,7 @@ namespace Zynx.RecipeCalc.Data.Store
 		T Load<T>(int id);
 		void Store<T>(T item);
 		void Delete<T>(T item);
+		List<T> List<T>();
+		List<T> List<T>(int limit);
 	}	//i
 }	//n
